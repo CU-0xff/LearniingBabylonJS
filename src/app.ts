@@ -26,6 +26,29 @@ class App {
     private _environment;
     private _player: Player | null = null;
 
+    constructor() {
+        // create the canvas html element and attach it to the webpage
+        this._canvas = this._createCanvas();
+
+        // initialize babylon scene and engine
+        this._engine = new Engine(this._canvas, true);
+        this._scene = new Scene(this._engine);
+
+
+        window.addEventListener("keydown", (ev) => {
+            // Shift + Ctrl + Alt + I
+            if (ev.shiftKey && ev.ctrlKey && ev.altKey && ev.key === "i") {
+                if (this._scene.debugLayer.isVisible()) {
+                    this._scene.debugLayer.hide();
+                } else {
+                    this._scene.debugLayer.show();
+                }
+            }
+        });
+
+        this._main();
+    }
+
     private _createCanvas(): HTMLCanvasElement {
         //Commented out for development
         document.documentElement.style["overflow"] = "hidden";
@@ -48,33 +71,14 @@ class App {
         return canvas;
     }
 
-    constructor() {
-        // create the canvas html element and attach it to the webpage
-        this._canvas = this._createCanvas();
-
-        // initialize babylon scene and engine
-        this._engine = new Engine(this._canvas, true);
-        this._scene = new Scene(this._engine);
-
-        window.addEventListener("keydown", (ev) => {
-            // Shift + Ctrl + Alt + I
-            if (ev.shiftKey && ev.ctrlKey && ev.altKey && ev.key === "i") {
-                if (this._scene.debugLayer.isVisible()) {
-                    this._scene.debugLayer.hide();
-                } else {
-                    this._scene.debugLayer.show();
-                }
-            }
-        });
-
-        this._main();
-    }
-
     private async _main(): Promise<void> {
         await this._goToStart();
 
+
+
         // Register a render loop to repeatedly render the scene
         this._engine.runRenderLoop(() => {
+            this._scene.debugLayer.show();
             switch (this._state) {
                 case State.START:
                     this._scene.render();
@@ -99,7 +103,6 @@ class App {
     }
 
     private async _goToStart() : Promise<void> {
-        console.log("GotoStart");
         this._engine.displayLoadingUI();
         this._scene.detachControl();
         let scene = new Scene(this._engine);

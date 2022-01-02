@@ -4,7 +4,8 @@
   "description": "Following the learning project of BabaylonJS",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack",
+    "start": "webpack-dev-server --port 8080"
   },
   "repository": {
     "type": "git",

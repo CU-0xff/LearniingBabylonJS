@@ -19,6 +19,7 @@
   "homepage": "https://github.com/CU-0xff/LearniingBabylonJS#readme",
   "devDependencies": {
     "@babylonjs/core": "^4.2.0",
+    "@babylonjs/gui": "^4.2.0",
     "@babylonjs/inspector": "^4.2.0",
     "html-webpack-plugin": "^5.5.0",
     "ts-loader": "^9.2.6",

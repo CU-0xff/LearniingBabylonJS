@@ -10,6 +10,7 @@ module.exports = {
         clean: true,
     },
     resolve: {
+        modules: [__dirname , 'node_modules'],
         extensions: [".tsx", ".ts", ".js"],
     },
     devServer: {
